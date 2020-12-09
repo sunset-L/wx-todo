@@ -3,21 +3,37 @@ import config from 'config/config'
 App({
   globalData: {
     isIos: false,
+    openid: ''
   },
   onLaunch: function () {
     // 初始化云函数环境
     this.cloudInit()
     // 获取系统配置
     this.getSystemInfo()
+    // 获取openId
+    // this.getOpenid()
   },
 
+  getOpenid: function() {
+    // 调用云函数
+    wx.showLoading({
+      icon: 'none',
+      title: '正在登录'
+    })
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+    }).then(res => {
+      console.log('[云函数] [login] user openid: ', res.result.openid)
+      this.globalData.openid = res.result.openid
+      wx.hideLoading()
+    })
+  },
   // 获取系统配置
   getSystemInfo () {
-    wx.getSystemInfo({
-      success: res => {
-        let platform = res.platform.toUpperCase()
-        this.globalData.isIos = platform == 'IOS'
-      }
+    wx.getSystemInfo().then(res => {
+      let platform = res.platform.toUpperCase()
+      this.globalData.isIos = platform == 'IOS'
     })
   },
   cloudInit() {
