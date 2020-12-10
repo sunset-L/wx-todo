@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "input-modal": "./components/input-modal/index",
+    "slide-view": "/components/slide-view/index"
+  }
 }

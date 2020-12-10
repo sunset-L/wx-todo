@@ -34,6 +34,10 @@ const actionMapping = {
         modifyTime: Date.now()
       }
     })
+  },
+  // 删除一条记录
+  remove: (req) => {
+    return todosDB.doc(req._id).remove()
   }
 }
 

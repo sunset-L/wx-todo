@@ -1,21 +1,40 @@
 <view class="container">
-  <view
-    class="item"
+  <slide-view
     wx:for="{{todoList}}"
-    wx:key="index"
+    wx:key="_id"
+    mark:id="{{item._id}}"
+    mark:content="{{item.content}}"
+    buttons="{{slideOptions}}"
+    show="{{ showSlide == item._id }}"
+    bindbuttontap="slideTap"
+    bindshow="slideShow"
   >
-    <radio
-      class="radio"
-      color="var(--primary-color)"
-      checked="{{item.complete}}"
-      data-id="{{item._id}}"
-      data-checked="{{item.complete}}"
-      bind:tap="handleComplete"
-    />
-    <text class="content">{{item.content}}</text>
-  </view>
+    <view
+      class="item"
+    >
+      <radio
+        class="radio"
+        color="var(--primary-color)"
+        checked="{{item.complete}}"
+        data-id="{{item._id}}"
+        data-checked="{{item.complete}}"
+        bind:tap="handleComplete"
+      />
+      <text class="content" bind:tap="onEditTodo">{{item.content}}</text>
+    </view>
+  </slide-view>
 </view>
 
-<view class="add-box">
+<!-- 新增按钮 -->
+<view class="add-box" bind:tap="switchInputModal">
   <text class="icon-add"></text>
 </view>
+
+<!-- 输入弹窗 -->
+<input-modal
+  show="{{showInput}}"
+  initTodo="{{initTodo}}"
+  bind:close="switchInputModal"
+  bind:confirm="todoConfirm"
+>
+</input-modal>

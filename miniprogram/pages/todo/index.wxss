@@ -1,5 +1,5 @@
 .container {
-  padding: 24rpx 32rpx 0;
+  padding-top: 24rpx;
 }
 
 .add-box {
@@ -23,6 +23,7 @@
   display: block;
   width: 40%;
   height: 4rpx;
+  border-radius: 2rpx;
   background-color: #fff;
   position: absolute;
   left: 30%;
@@ -33,7 +34,7 @@
 }
 
 .item {
-  padding: 32rpx 16rpx;
+  padding: 32rpx 48rpx;
   word-break: break-all;
 }
 .item .radio {
@@ -43,4 +44,7 @@
 }
 .item .content {
   vertical-align: middle;
+}
+.item .radio[aria-checked=true] + .content {
+  text-decoration: line-through;
 }

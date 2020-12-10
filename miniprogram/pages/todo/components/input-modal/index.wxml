@@ -1,0 +1,20 @@
+
+<form class="outer {{show}} {{extClass}}" bindsubmit="confirm">
+  <view class="mask {{show}}" catch:touchmove="empty" catch:tap="close"></view>
+  <view class="inner {{show}}" style="{{show ? 'transform: translateY(-' + keyBoardHeight + 'px)' : ''}}">
+    <textarea
+      auto-height
+      adjust-position="{{false}}"
+      class="textarea"
+      focus="{{focus}}"
+      show-confirm-bar="{{false}}"
+      placeholder="输入内容"
+      bindinput="handleInput"
+      value="{{content}}"
+    />
+    <view class="tools">
+      <view></view>
+      <view class="confirm-btn" bind:tap="confirm">完成</view>
+    </view>
+  </view>
+</form>
