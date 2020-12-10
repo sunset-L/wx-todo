@@ -1,3 +1,6 @@
+page {
+  --primary-color: #7882C0
+}
 button {
   background: initial;
 }
@@ -9,4 +12,3 @@ button:focus{
 button::after{
   border: none;
 }
-

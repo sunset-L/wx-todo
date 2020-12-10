@@ -1,3 +1,21 @@
 <view class="container">
-  <view class="list" wx:for="{{todoList}}" wx:key="index">{{item.content}}</view>
+  <view
+    class="item"
+    wx:for="{{todoList}}"
+    wx:key="index"
+  >
+    <radio
+      class="radio"
+      color="var(--primary-color)"
+      checked="{{item.complete}}"
+      data-id="{{item._id}}"
+      data-checked="{{item.complete}}"
+      bind:tap="handleComplete"
+    />
+    <text class="content">{{item.content}}</text>
+  </view>
+</view>
+
+<view class="add-box">
+  <text class="icon-add"></text>
 </view>

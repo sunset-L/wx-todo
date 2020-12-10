@@ -13,7 +13,7 @@ const actionMapping = {
   list: () => {
     return todosDB.where({
       openId: this.wxContext.OPENID
-    }).get()
+    }).orderBy('modifyTime', 'desc').get()
   },
   // 添加一条记录
   add: (req) => {
@@ -21,10 +21,20 @@ const actionMapping = {
       data: {
         openId: this.wxContext.OPENID,
         content: req.content,
-        complete: false
+        complete: false,
+        modifyTime: Date.now()
       }
     })
   },
+  // 更新一条记录
+  update: (req) => {
+    return todosDB.doc(req._id).update({
+      data: {
+        ...req.body,
+        modifyTime: Date.now()
+      }
+    })
+  }
 }
 
 // 云函数入口函数

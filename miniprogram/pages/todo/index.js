@@ -16,6 +16,7 @@ Page({
     this.fetchList()
   },
 
+  // 查列表
   fetchList() {
     wx.cloud.callFunction({
       name: 'todo',
@@ -28,6 +29,7 @@ Page({
       })
     })
   },
+  // 添加一条记录
   addTodo() {
     wx.cloud.callFunction({
       name: 'todo',
@@ -36,6 +38,23 @@ Page({
         content: ''
       },
     }).then(res => {
+    })
+  },
+  // 处理完成事件
+  handleComplete(e) {
+    const complete = e.currentTarget.dataset.checked
+    const _id = e.currentTarget.dataset.id
+    wx.cloud.callFunction({
+      name: 'todo',
+      data: {
+        action: 'update',
+        _id: _id,
+        body: {
+          complete: !complete
+        }
+      },
+    }).then(() => {
+      this.fetchList()
     })
   }
 })
