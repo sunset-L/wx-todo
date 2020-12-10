@@ -1,28 +1,33 @@
 <view class="container">
-  <slide-view
-    wx:for="{{todoList}}"
-    wx:key="_id"
-    mark:id="{{item._id}}"
-    mark:content="{{item.content}}"
-    buttons="{{slideOptions}}"
-    show="{{ showSlide == item._id }}"
-    bindbuttontap="slideTap"
-    bindshow="slideShow"
-  >
-    <view
-      class="item"
+  <view wx:if="{{!todoList || !todoList.length}}">
+    点击左下角按钮创建待办
+  </view>
+  <block wx:else>
+    <slide-view
+      wx:for="{{todoList}}"
+      wx:key="_id"
+      mark:id="{{item._id}}"
+      mark:content="{{item.content}}"
+      buttons="{{slideOptions}}"
+      show="{{ showSlide == item._id }}"
+      bindbuttontap="slideTap"
+      bindshow="slideShow"
     >
-      <radio
-        class="radio"
-        color="var(--primary-color)"
-        checked="{{item.complete}}"
-        data-id="{{item._id}}"
-        data-checked="{{item.complete}}"
-        bind:tap="handleComplete"
-      />
-      <text class="content" bind:tap="onEditTodo">{{item.content}}</text>
-    </view>
-  </slide-view>
+      <view
+        class="item"
+      >
+        <radio
+          class="radio"
+          color="var(--primary-color)"
+          checked="{{item.complete}}"
+          data-id="{{item._id}}"
+          data-checked="{{item.complete}}"
+          bind:tap="handleComplete"
+        />
+        <text class="content" bind:tap="onEditTodo">{{item.content}}</text>
+      </view>
+    </slide-view>
+  </block>
 </view>
 
 <!-- 新增按钮 -->
