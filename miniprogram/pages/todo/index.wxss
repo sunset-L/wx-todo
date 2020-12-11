@@ -4,6 +4,7 @@ page {
 .container {
   padding-top: 24rpx;
 }
+/* 数据为空 */
 .no-todo-box {
   position: absolute;
   width: max-content;
@@ -28,6 +29,7 @@ page {
   margin-bottom: 16rpx;
 }
 
+/* 新增按钮 */
 .add-box {
   position: fixed;
   bottom: 70rpx;
@@ -36,6 +38,7 @@ page {
   height: 100rpx;
   background-color: var(--primary-color);
   border-radius: 50%;
+  z-index: 10;
 }
 .icon-add {
   position: relative;
@@ -59,6 +62,7 @@ page {
   transform: rotate(90deg);
 }
 
+/* 待办条目 */
 .item {
   padding: 32rpx 48rpx;
   word-break: break-all;

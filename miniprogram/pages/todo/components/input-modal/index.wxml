@@ -3,6 +3,7 @@
   <view class="mask {{show}}" catch:touchmove="empty" catch:tap="close"></view>
   <view class="inner {{show}}" style="{{show ? 'transform: translateY(-' + keyBoardHeight + 'px)' : ''}}">
     <textarea
+      hidden="{{!show}}"
       auto-height
       adjust-position="{{false}}"
       class="textarea"
