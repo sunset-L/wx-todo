@@ -22,14 +22,22 @@ Page({
     this.fetchList()
   },
 
+  onShareAppMessage() {
+    return {
+      imageUrl: '/assets/img/share.jpg'
+    }
+  },
+
   // 查列表
   fetchList() {
+    wx.showNavigationBarLoading()
     wx.cloud.callFunction({
       name: 'todo',
       data: {
         action: 'list'
       },
     }).then(res => {
+      wx.hideNavigationBarLoading()
       this.setData({
         todoList: res.result.data
       })
@@ -80,19 +88,22 @@ Page({
   },
   // 新增请求
   addTodo(content) {
-    wx.cloud.callFunction({
+    wx.showNavigationBarLoading()
+    return wx.cloud.callFunction({
       name: 'todo',
       data: {
         action: 'add',
         content
       },
     }).then(() => {
+      wx.hideNavigationBarLoading()
       this.switchInputModal()
       this.fetchList()
     })
   },
   // 编辑请求
   editTodo(id, body) {
+    wx.showNavigationBarLoading()
     return wx.cloud.callFunction({
       name: 'todo',
       data: {
@@ -100,7 +111,7 @@ Page({
         _id: id,
         body: body
       },
-    })
+    }).then(() => {wx.hideNavigationBarLoading()})
   },
   // 控制要显示的项
   slideShow(e) {
@@ -110,6 +121,7 @@ Page({
   },
   slideTap(e) {
     const id = e.mark.id
+    wx.showNavigationBarLoading()
     wx.cloud.callFunction({
       name: 'todo',
       data: {
@@ -117,6 +129,7 @@ Page({
         _id: id,
       },
     }).then(() => {
+      wx.hideNavigationBarLoading()
       this.fetchList()
     })
   }
