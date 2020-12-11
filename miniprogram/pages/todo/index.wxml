@@ -1,33 +1,32 @@
 <view class="container">
-  <view wx:if="{{!todoList || !todoList.length}}">
-    点击左下角按钮创建待办
+  <view class="no-todo-box {{todoList.length ? 'hide' : ''}}">
+    <image src="/assets/icon/todo.png" class="icon-todo" mode="widthFix" />
+    没有待办
   </view>
-  <block wx:else>
-    <slide-view
-      wx:for="{{todoList}}"
-      wx:key="_id"
-      mark:id="{{item._id}}"
-      mark:content="{{item.content}}"
-      buttons="{{slideOptions}}"
-      show="{{ showSlide == item._id }}"
-      bindbuttontap="slideTap"
-      bindshow="slideShow"
+  <slide-view
+    wx:for="{{todoList}}"
+    wx:key="_id"
+    mark:id="{{item._id}}"
+    mark:content="{{item.content}}"
+    buttons="{{slideOptions}}"
+    show="{{ showSlide == item._id }}"
+    bindbuttontap="slideTap"
+    bindshow="slideShow"
+  >
+    <view
+      class="item"
     >
-      <view
-        class="item"
-      >
-        <radio
-          class="radio"
-          color="var(--primary-color)"
-          checked="{{item.complete}}"
-          data-id="{{item._id}}"
-          data-checked="{{item.complete}}"
-          bind:tap="handleComplete"
-        />
-        <text class="content" bind:tap="onEditTodo">{{item.content}}</text>
-      </view>
-    </slide-view>
-  </block>
+      <radio
+        class="radio"
+        color="var(--primary-color)"
+        checked="{{item.complete}}"
+        data-id="{{item._id}}"
+        data-checked="{{item.complete}}"
+        bind:tap="handleComplete"
+      />
+      <text class="content" bind:tap="onEditTodo">{{item.content}}</text>
+    </view>
+  </slide-view>
 </view>
 
 <!-- 新增按钮 -->
