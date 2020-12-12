@@ -34,9 +34,12 @@ Component({
     },
     empty() {},
     onShow() {
-      this.setData({
-        focus: true,
-        content: this.properties.initContent || ''
+      // textarea如果不隐藏的话placeholder会在手机上出现,隐藏后不能立即聚焦
+      wx.nextTick(() => {
+        this.setData({
+          focus: true,
+          content: this.properties.initContent || ''
+        })
       })
       wx.onKeyboardHeightChange(res => {
         console.log(res)
