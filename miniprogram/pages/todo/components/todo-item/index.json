@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "slide-view": "/components/slide-view/index",
+    "input-modal": "../input-modal/index"
+  }
+}

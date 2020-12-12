@@ -1,32 +1,25 @@
 <view class="container">
-  <view class="no-todo-box {{todoList.length ? 'hide' : ''}}">
+  <view class="no-todo-box {{(incompleteTodo.length || completeTodo.length) ? 'hide' : ''}}">
     <image src="/assets/icon/todo.png" class="icon-todo" mode="widthFix" />
     没有待办
   </view>
-  <slide-view
-    wx:for="{{todoList}}"
+  <todo-item
+    wx:for="{{incompleteTodo}}"
     wx:key="_id"
-    mark:id="{{item._id}}"
-    mark:content="{{item.content}}"
-    buttons="{{slideOptions}}"
-    show="{{ showSlide == item._id }}"
-    bindbuttontap="slideTap"
-    bindshow="slideShow"
-  >
-    <view
-      class="item"
-    >
-      <radio
-        class="radio"
-        color="var(--primary-color)"
-        checked="{{item.complete}}"
-        data-id="{{item._id}}"
-        data-checked="{{item.complete}}"
-        bind:tap="handleComplete"
-      />
-      <text class="content" bind:tap="onEditTodo">{{item.content}}</text>
-    </view>
-  </slide-view>
+    item="{{item}}"
+    showSlide="{{showSlide}}"
+    bind:showSlide="slideShow"
+    bind:refresh="fetchList"
+  />
+  <!-- 已完成 -->
+  <todo-item
+    wx:for="{{completeTodo}}"
+    wx:key="_id"
+    item="{{item}}"
+    showSlide="{{showSlide}}"
+    bind:showSlide="slideShow"
+    bind:refresh="fetchList"
+  />
 </view>
 
 <!-- 新增按钮 -->
@@ -37,8 +30,7 @@
 <!-- 输入弹窗 -->
 <input-modal
   show="{{showInput}}"
-  initTodo="{{initTodo}}"
   bind:close="switchInputModal"
-  bind:confirm="todoConfirm"
+  bind:confirm="addTodo"
 >
 </input-modal>

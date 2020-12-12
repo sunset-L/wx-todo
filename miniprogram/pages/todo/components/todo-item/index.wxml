@@ -1,0 +1,27 @@
+<slide-view
+  buttons="{{slideOptions}}"
+  show="{{ showSlide == item._id }}"
+  bindbuttontap="removeItem"
+  bindshow="slideShow"
+>
+  <view
+    class="item"
+  >
+    <radio
+      class="radio"
+      color="var(--primary-color)"
+      checked="{{item.complete}}"
+      bind:tap="handleComplete"
+    />
+    <text class="content" bind:tap="switchInputModal">{{item.content}}</text>
+  </view>
+</slide-view>
+
+<!-- 输入弹窗 -->
+<input-modal
+  show="{{showInput}}"
+  initContent="{{item.content}}"
+  bind:close="switchInputModal"
+  bind:confirm="todoConfirm"
+>
+</input-modal>

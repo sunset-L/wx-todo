@@ -1,0 +1,17 @@
+
+/* 待办条目 */
+.item {
+  padding: 32rpx 48rpx;
+  word-break: break-all;
+}
+.item .radio {
+  zoom: .8;
+  vertical-align: middle;
+  margin-right: 16rpx;
+}
+.item .content {
+  vertical-align: middle;
+}
+.item .radio[aria-checked=true] + .content {
+  text-decoration: line-through;
+}

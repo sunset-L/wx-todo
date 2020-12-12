@@ -1,6 +1,6 @@
 {
   "usingComponents": {
     "input-modal": "./components/input-modal/index",
-    "slide-view": "/components/slide-view/index"
+    "todo-item": "./components/todo-item/index"
   }
 }

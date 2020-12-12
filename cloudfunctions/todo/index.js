@@ -10,10 +10,20 @@ const todosDB = db.collection('todos')
 
 // 处理发来的请求
 const actionMapping = {
-  list: () => {
-    return todosDB.where({
+  list: async () => {
+    let result = await todosDB.where({
       openId: this.wxContext.OPENID
     }).orderBy('modifyTime', 'desc').get()
+    result = result.data.reduce((pre, it) => {
+      if (it.complete) {
+        pre.complete.push(it)
+      } else {
+        pre.incomplete.push(it)
+      }
+      return pre
+    }, {complete: [], incomplete: []})
+    console.log(result)
+    return result
   },
   // 添加一条记录
   add: (req) => {

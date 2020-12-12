@@ -9,8 +9,8 @@ Component({
     show: Boolean,
     // 从外部控制样式
     extClass: String,
-    // 初始化数据
-    initTodo: Object
+    // 初始化内容
+    initContent: String
   },
 
   /**
@@ -30,16 +30,13 @@ Component({
       this.triggerEvent('close')
     },
     confirm() {
-      this.triggerEvent('confirm', {
-        content: this.data.content,
-        id: this.properties.initTodo.id
-      })
+      this.triggerEvent('confirm', this.data.content)
     },
     empty() {},
     onShow() {
       this.setData({
         focus: true,
-        content: this.properties.initTodo.content || ''
+        content: this.properties.initContent || ''
       })
       wx.onKeyboardHeightChange(res => {
         console.log(res)
